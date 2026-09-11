@@ -177,51 +177,6 @@ npm install
 
 ---
 
-## ⚙️ Environment Variables
-
-Create a `.env` file in the root directory (or copy from `.env.example`):
-
-```bash
-cp .env.example .env
-```
-
-Configure your parameters:
-
-```env
-# Server
-PORT=5000
-NODE_ENV=development
-
-# MongoDB Connection
-MONGODB_URI=mongodb://localhost:27017/ecommerce
-
-# JWT Secret Keys & Expiration
-JWT_SECRET=your_super_secret_jwt_key_change_in_production
-JWT_EXPIRES_IN=7d
-JWT_REFRESH_SECRET=your_super_secret_refresh_key_change_in_production
-JWT_REFRESH_EXPIRES_IN=30d
-
-# Cookie Security Secret
-COOKIE_SECRET=your_cookie_secret_change_in_production
-
-# Frontend Client URL (for CORS)
-CLIENT_URL=http://localhost:5173
-
-# Optional: Cloudinary Storage
-CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
-
-# Optional: SMTP Email Service
-EMAIL_HOST=
-EMAIL_PORT=587
-EMAIL_USER=
-EMAIL_PASS=
-EMAIL_FROM=noreply@ecommerce.com
-```
-
----
-
 ## 🌱 Database Seeding
 
 Populate the database with the default Admin user, full product categories, sample products (fetching live from DummyJSON with fallback to local curated datasets), and promo coupons:
@@ -236,37 +191,7 @@ npm run seed:categories  # Creates 10 default categories
 npm run seed:products    # Imports 30+ products + promo coupons
 ```
 
-### Default Admin Credentials
-- **Email**: `admin@ecommerce.com`
-- **Password**: `Admin@12345`
 
----
-
-## 🏃 Running the Server
-
-```bash
-# Start in development mode (with hot-reload via nodemon)
-npm run dev
-
-# Start in production mode
-npm start
-```
-
-When started, the server outputs:
-```
-🚀 Server running on port 5000 [development]
-📡 API: http://localhost:5000/api
-❤️  Health: http://localhost:5000/api/health
-```
-
----
-
-## 📚 API Endpoints Reference
-
-### Health Check
-- `GET /api/health` — Check server status.
-
----
 
 ### Authentication (`/api/auth`)
 | Method | Endpoint | Access | Description |

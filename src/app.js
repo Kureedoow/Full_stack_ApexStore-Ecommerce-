@@ -66,7 +66,16 @@ if (env.isDevelopment) {
 // ─── General rate limiting ─────────────────────────────────────────────────────
 app.use('/api/', generalLimiter);
 
-// ─── Health check ──────────────────────────────────────────────────────────────
+// ─── Health check & Root endpoint ──────────────────────────────────────────────
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'ApexStore E-Commerce API is running',
+    health: '/api/health',
+    environment: env.nodeEnv,
+  });
+});
+
 app.get('/api/health', (req, res) => {
   res.json({
     success: true,

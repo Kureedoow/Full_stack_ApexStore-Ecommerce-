@@ -59,9 +59,6 @@ const couponSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// ─── Indexes ──────────────────────────────────────────────────────────────────
-couponSchema.index({ code: 1 });
-
 // ─── Instance method: check if coupon is valid ────────────────────────────────
 couponSchema.methods.isValid = function (subtotal) {
   const now = new Date();

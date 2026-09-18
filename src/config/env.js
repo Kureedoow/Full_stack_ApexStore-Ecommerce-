@@ -2,16 +2,28 @@
 // Centralizes environment variable access and validation
 
 import dotenv from 'dotenv';
-dotenv.config();
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load .env explicitly from the project root regardless of current working directory
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config(); // Fallback for standard environments
 
 const requiredEnvVars = ['MONGODB_URI', 'JWT_SECRET'];
 
-requiredEnvVars.forEach((key) => {
-  if (!process.env[key]) {
-    console.error(`❌ Missing required environment variable: ${key}`);
+const missingVars = requiredEnvVars.filter((key) => !process.env[key]);
+
+if (missingVars.length > 0) {
+  console.error('\n❌ Missing required environment variable(s):', missingVars.join(', '));
+  console.error('👉 For local development: Ensure your .env file at the project root contains these variables.');
+  console.error('👉 For Vercel deployment: Add these variables in the Vercel Dashboard: Settings -> Environment Variables.\n');
+  if (!process.env.VERCEL) {
     process.exit(1);
   }
-});
+}
 
 export const env = {
   port: parseInt(process.env.PORT, 10) || 5000,
